@@ -7,7 +7,25 @@
 		<key>WeatherForecasting.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1AF9BBAB21C5D0AC005BD397</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1AF9BBC221C5D0AE005BD397</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1AF9BBCD21C5D0AE005BD397</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
