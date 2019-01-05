@@ -11,7 +11,6 @@ import Foundation
 extension Float {
     func compassDirection() -> String {
         if self < 0 { return "" }
-        
         let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
         let index = (Int(self)/45) & 7
         return directions[index]

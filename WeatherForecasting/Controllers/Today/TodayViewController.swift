@@ -36,7 +36,6 @@ class TodayViewController: UIViewController {
         super.viewDidLoad()
         forecastNetwork.outputTodayNetwork = self
         requestForecastWeather()
-        print("UUID" + UIDevice.current.identifierForVendor!.uuidString)
     }
     
     override func viewWillAppear(_ animated: Bool) {

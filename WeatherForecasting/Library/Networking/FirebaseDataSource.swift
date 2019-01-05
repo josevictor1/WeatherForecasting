@@ -13,11 +13,6 @@ class FirebaseDataSource {
     
     private var dataBaseReference: DatabaseReference!
     
-    init() {
-        //FirebaseApp.configure()
-        
-    }
-    
     func setDataBaseReference() {
         dataBaseReference = Database.database().reference().child("forecasts");
     }
@@ -25,7 +20,6 @@ class FirebaseDataSource {
     func addForecast(with model: TodayModel, latitude: Double, longitude: Double) {
         let key = dataBaseReference.childByAutoId().key
         
-        //creating artist with the given values
         let forecast = ["id" : key,
                         "latitude" : String(latitude),
                         "longitude" : String(longitude),
@@ -33,13 +27,7 @@ class FirebaseDataSource {
                         "weather" : model.weather?.first?.main,
                         "windSpeed" : String(format:"%.2f", (model.wind?.speed) ?? 0),
                         "windDirection" : String(model.wind?.deg ?? 0)]
-        
-        //adding the artist inside the generated unique key
-        //refArtists.child(key).setValue(artist)
         dataBaseReference.child(key!).setValue(forecast)
-        
-        //displaying message
-        //labelMessage.text = "Artist Added"
     }
     
 }

@@ -31,6 +31,7 @@ class ForecastNetworkDataSource {
     var provider = MoyaProvider<WeatherAPI>()
     var firebaseDataSource = FirebaseDataSource()
     let locationService = LocationService.shared
+    let disposeBag = DisposeBag()
     
     init(provider: MoyaProvider<WeatherAPI> = MoyaProvider(plugins: [NetworkLoggerPlugin(verbose: true)])) {
         self.provider = provider
@@ -41,7 +42,7 @@ class ForecastNetworkDataSource {
             locationService.requestLocation { (result) in
                 switch result {
                 case .sucess(let coordinates):
-                    _ = self.requestForecast(latitude: coordinates.latitude, longitude: coordinates.loginditude).subscribe { (event) in
+                    self.requestForecast(latitude: coordinates.latitude, longitude: coordinates.loginditude).subscribe { (event) in
                         switch event {
                         case .success(let result):
                             self.outputForecastNetwork?.forecastRequest(with: self.fillForecastViewModel(with: result))
@@ -49,7 +50,7 @@ class ForecastNetworkDataSource {
                             self.outputForecastNetwork?.forecastRequest(with: .requestError)
                         }
                     }
-                    break
+                    .disposed(by: self.disposeBag)
                 case .fail:
                     self.outputForecastNetwork?.forecastRequest(with: .locationError)
                 }
@@ -64,7 +65,7 @@ class ForecastNetworkDataSource {
             locationService.requestLocation { (result) in
                 switch result {
                 case .sucess(let coordinates):
-                    _ = self.requestTodayWeather(latitude: coordinates.latitude, longitude: coordinates.loginditude).subscribe { (event) in
+                    self.requestTodayWeather(latitude: coordinates.latitude, longitude: coordinates.loginditude).subscribe { (event) in
                         switch event {
                         case .success(let result):
                             let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.loginditude)
@@ -79,7 +80,7 @@ class ForecastNetworkDataSource {
                             self.outputTodayNetwork?.weatherRequest(with: .requestError)
                         }
                     }
-                    break
+                    .disposed(by: self.disposeBag)
                 case .fail:
                     self.outputTodayNetwork?.weatherRequest(with: .locationError)
                 }
