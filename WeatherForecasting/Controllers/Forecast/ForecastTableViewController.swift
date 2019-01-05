@@ -18,7 +18,7 @@ class ForecastTableViewController: UITableViewController {
     let forecastNetwork = ForecastNetworkDataSource()
     var forecastList: [SectionOfCustomData] = [] {
         didSet {
-            if forecastList.count > 0 {
+            if !forecastList.isEmpty {
                 showData()
             }
         }
